@@ -6,4 +6,7 @@ while choice is None:
         choice = int(choice)
     except ValueError:
         choice = None
+    else:
+        if not(1 <= choice <= 9):
+            choice = None
 print(type(choice))
