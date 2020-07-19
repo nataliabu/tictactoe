@@ -1,5 +1,6 @@
+grid_content = list(range(1, 10))
 while True:
-    print(" 1 | 2 | 3 \n---+---+---\n 4 | 5 | 6 \n---+---+---\n 7 | 8 | 9 ")
+    print(" {} | {} | {} \n---+---+---\n {} | {} | {} \n---+---+---\n {} | {} | {} ".format(*grid_content))
     choice = None
     while choice is None:
         choice = input("Where do you want to play: ")
