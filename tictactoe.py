@@ -1,6 +1,10 @@
 grid_content = list(range(1, 10))
 while True:
-    print(" {} | {} | {} \n---+---+---\n {} | {} | {} \n---+---+---\n {} | {} | {} ".format(*grid_content))
+    print(" {} | {} | {} ".format(*grid_content[:3]))
+    print("---+---+---")
+    print(" {} | {} | {} ".format(*grid_content[3:6]))
+    print("---+---+---")
+    print(" {} | {} | {} ".format(*grid_content[6:]))
     choice = None
     while choice is None:
         choice = input("Where do you want to play: ")
