@@ -1,4 +1,5 @@
 grid_content = list(range(1, 10))
+turn = "X"
 while True:
     print(" {} | {} | {} ".format(*grid_content[:3]))
     print("---+---+---")
@@ -20,4 +21,9 @@ while True:
                 print("sorry baby, already taken")
                 choice = None
 
-    grid_content[choice-1] = "X"
+    grid_content[choice-1] = turn
+
+    if turn == "X":
+        turn = "O"
+    else:
+        turn = "X"
