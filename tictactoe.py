@@ -15,8 +15,7 @@ while True:
         else:
             if not(1 <= choice <= 9):
                 choice = None
-            elif grid_content[choice-1] == choice:
-                grid_content[choice-1] = "X"
-            else:
+            elif grid_content[choice-1] != choice:
                 print("sorry baby, already taken")
                 choice = None
+    grid_content[choice-1] = "X"
