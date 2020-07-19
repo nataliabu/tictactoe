@@ -5,6 +5,7 @@ while True:
     print(" {} | {} | {} ".format(*grid_content[3:6]))
     print("---+---+---")
     print(" {} | {} | {} ".format(*grid_content[6:]))
+
     choice = None
     while choice is None:
         choice = input("Where do you want to play: ")
@@ -18,4 +19,5 @@ while True:
             elif grid_content[choice-1] != choice:
                 print("sorry baby, already taken")
                 choice = None
+
     grid_content[choice-1] = "X"
