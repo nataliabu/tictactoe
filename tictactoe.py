@@ -33,6 +33,8 @@ while True:
         or grid_content[0] == grid_content[4] and grid_content[4] == grid_content[8]
         or grid_content[2] == grid_content[4] and grid_content[4] == grid_content[6]
     ):
-        print("Congrats player {}, you won".format(players[current_player]))
+        break
 
     current_player = (current_player + 1) % 2
+
+print("Congrats player {}, you won".format(players[current_player]))
