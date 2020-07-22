@@ -4,6 +4,7 @@ current_player = 0
 players = ("X", "O")
 
 def render(grid):
+    print("\033[2J\033[0;0H") # clear the screen and move cursor at the top
     print(" {} | {} | {} ".format(*grid[:3]))
     print("---+---+---")
     print(" {} | {} | {} ".format(*grid[3:6]))
