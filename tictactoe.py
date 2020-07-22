@@ -2,13 +2,16 @@ grid_content = list(range(1, 10))
 turn_count = 0
 current_player = 0
 players = ("X", "O")
-while True:
-    print(" {} | {} | {} ".format(*grid_content[:3]))
-    print("---+---+---")
-    print(" {} | {} | {} ".format(*grid_content[3:6]))
-    print("---+---+---")
-    print(" {} | {} | {} ".format(*grid_content[6:]))
 
+def render(grid):
+    print(" {} | {} | {} ".format(*grid[:3]))
+    print("---+---+---")
+    print(" {} | {} | {} ".format(*grid[3:6]))
+    print("---+---+---")
+    print(" {} | {} | {} ".format(*grid[6:]))
+
+render(grid_content)
+while True:
     choice = None
     while choice is None:
         choice = input("Where do you want to play: ")
@@ -24,6 +27,8 @@ while True:
                 choice = None
 
     grid_content[choice-1] = players[current_player]
+
+    render(grid_content)
 
     turn_count += 1
 
