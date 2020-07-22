@@ -15,7 +15,7 @@ render(grid_content)
 while True:
     choice = None
     while choice is None:
-        choice = input("Where do you want to play: ")
+        choice = input("Where do you want to play (1 to 9): ")
         try:
             choice = int(choice)
         except ValueError:
