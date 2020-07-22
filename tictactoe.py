@@ -1,4 +1,5 @@
 grid_content = list(range(1, 10))
+turn_count = 0
 current_player = 0
 players = ("X", "O")
 while True:
@@ -24,6 +25,8 @@ while True:
 
     grid_content[choice-1] = players[current_player]
 
+    turn_count += 1
+
     if (grid_content[0] == grid_content[1] and grid_content[1] == grid_content[2]
         or grid_content[3] == grid_content[4] and grid_content[4] == grid_content[5]
         or grid_content[6] == grid_content[7] and grid_content[7] == grid_content[8]
@@ -33,8 +36,20 @@ while True:
         or grid_content[0] == grid_content[4] and grid_content[4] == grid_content[8]
         or grid_content[2] == grid_content[4] and grid_content[4] == grid_content[6]
     ):
+        print("Congrats player {}, you won".format(players[current_player]))
+        break
+    elif turn_count == 9:
+        print(" _")
+        print("/ \\")
+        print("\\ /")
+        print(" o")
+        print("/ \\")
+        print("| |")
+        print("| |")
+        print("| |")
+        print("| |")
+        print("\\./")
+        print("It's a tie")
         break
 
     current_player = (current_player + 1) % 2
-
-print("Congrats player {}, you won".format(players[current_player]))
