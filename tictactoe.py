@@ -21,7 +21,7 @@ render(grid_content)
 while True:
     choice = None
     while choice is None:
-        choice = input("Where do you want to play (1 to 9): ")
+        choice = input("Player {}, where do you want to play (1 to 9): ".format(players[current_player]))
         try:
             choice = int(choice)
         except ValueError:
