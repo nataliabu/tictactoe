@@ -4,12 +4,18 @@ current_player = 0
 players = ("X", "O")
 
 def render(grid):
+    def element_color(element):
+        try:
+            return "\033[38;5;246m{}\033[0m".format(int(element))
+        except ValueError:
+            return "\033[38;5;123m{}\033[0m".format(element)
+
     print("\033[2J\033[0;0H") # clear the screen and move cursor at the top
-    print(" {} | {} | {} ".format(*grid[:3]))
+    print(" {} | {} | {} ".format(*[element_color(element) for element in grid[:3]]))
     print("---+---+---")
-    print(" {} | {} | {} ".format(*grid[3:6]))
+    print(" {} | {} | {} ".format(*[element_color(element) for element in grid[3:6]]))
     print("---+---+---")
-    print(" {} | {} | {} ".format(*grid[6:]))
+    print(" {} | {} | {} ".format(*[element_color(element) for element in grid[6:]]))
 
 render(grid_content)
 while True:
