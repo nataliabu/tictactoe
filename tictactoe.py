@@ -25,12 +25,14 @@ while True:
         try:
             choice = int(choice)
         except ValueError:
+            print("You have to type an integer between 1 and 9")
             choice = None
         else:
             if not(1 <= choice <= 9):
+                print("You have to type an integer between 1 and 9")
                 choice = None
             elif grid_content[choice-1] != choice:
-                print("sorry baby, already taken")
+                print("Sorry baby, already taken")
                 choice = None
 
     grid_content[choice-1] = players[current_player]
