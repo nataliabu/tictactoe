@@ -2,6 +2,10 @@ grid_content = list(range(1, 10))
 turn_count = 0
 current_player = 0
 players = ("X", "O")
+player_names = [
+    input("What is your name, player 1? "),
+    input("What is your name, player 2? ")
+]
 
 def render(grid):
     def element_color(element):
@@ -21,7 +25,7 @@ render(grid_content)
 while True:
     choice = None
     while choice is None:
-        choice = input("Player {}, where do you want to play (1 to 9): ".format(players[current_player]))
+        choice = input("{}, where do you want to play (1 to 9): ".format(player_names[current_player]))
         try:
             choice = int(choice)
         except ValueError:
@@ -50,7 +54,7 @@ while True:
         or grid_content[0] == grid_content[4] and grid_content[4] == grid_content[8]
         or grid_content[2] == grid_content[4] and grid_content[4] == grid_content[6]
     ):
-        print("Congrats player {}, you won".format(players[current_player]))
+        print("Congrats {}, you won".format(players[current_player]))
         break
     elif turn_count == 9:
         print(" _")
