@@ -1,10 +1,9 @@
 grid_content = list(range(1, 10))
 turn_count = 0
 current_player = 0
-players = ("X", "O")
-player_names = [
-    input("What is your name, player 1? "),
-    input("What is your name, player 2? ")
+players_attributes = [
+    {"name": "", "character": "X"},
+    {"name": "", "character": "O"}
 ]
 
 def render(grid):
@@ -21,11 +20,14 @@ def render(grid):
     print("---+---+---")
     print(" {} | {} | {} ".format(*[element_color(element) for element in grid[6:]]))
 
+print("\033[2J\033[0;0H") # clear the screen and move cursor at the top
+players_attributes[0]["name"] = input("What is your name player 1: ")
+players_attributes[1]["name"] = input("What is your name player 2: ")
 render(grid_content)
 while True:
     choice = None
     while choice is None:
-        choice = input("{}, where do you want to play (1 to 9): ".format(player_names[current_player]))
+        choice = input("{}, where do you want to play (1 to 9): ".format(players_attributes[current_player]["name"]))
         try:
             choice = int(choice)
         except ValueError:
@@ -39,7 +41,7 @@ while True:
                 print("Sorry baby, already taken")
                 choice = None
 
-    grid_content[choice-1] = players[current_player]
+    grid_content[choice-1] = players_attributes[current_player]["character"]
 
     render(grid_content)
 
@@ -54,7 +56,7 @@ while True:
         or grid_content[0] == grid_content[4] and grid_content[4] == grid_content[8]
         or grid_content[2] == grid_content[4] and grid_content[4] == grid_content[6]
     ):
-        print("Congrats {}, you won".format(players[current_player]))
+        print("Congrats {}, you won".format(players_attributes[current_player]["name"]))
         break
     elif turn_count == 9:
         print(" _")
