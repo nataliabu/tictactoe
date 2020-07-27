@@ -1,9 +1,11 @@
+import time
+
 grid_content = list(range(1, 10))
 turn_count = 0
 current_player = 0
 players_attributes = [
-    {"name": "", "character": "X"},
-    {"name": "", "character": "O"}
+    {"name": "", "character": "X", "type": ""},
+    {"name": "", "character": "O", "type": ""}
 ]
 
 def render(grid):
@@ -21,25 +23,47 @@ def render(grid):
     print(" {} | {} | {} ".format(*[element_color(element) for element in grid[6:]]))
 
 print("\033[2J\033[0;0H") # clear the screen and move cursor at the top
-players_attributes[0]["name"] = input("What is your name player 1: ")
-players_attributes[1]["name"] = input("What is your name player 2: ")
+
+number_of_players = None
+while number_of_players is None:
+    number_of_players = input("Number of players (1 or 2): ")
+    if number_of_players not in {"1", "2"}:
+        print("You have to type an integer between 1 and 2")
+        number_of_players = None
+
+players_attributes[0]["type"] = "human"
+if number_of_players == "2":
+    players_attributes[0]["name"] = input("What is your name player 1: ")
+    players_attributes[1]["name"] = input("What is your name player 2: ")
+    players_attributes[1]["type"] = "human"
+else:
+    players_attributes[0]["name"] = input("What is your name: ")
+    players_attributes[1]["type"] = "machine"
+
 render(grid_content)
 while True:
-    choice = None
-    while choice is None:
-        choice = input("{}, where do you want to play (1 to 9): ".format(players_attributes[current_player]["name"]))
-        try:
-            choice = int(choice)
-        except ValueError:
-            print("You have to type an integer between 1 and 9")
-            choice = None
-        else:
-            if not(1 <= choice <= 9):
+    if players_attributes[current_player]["type"] == "human":
+        choice = None
+        while choice is None:
+            choice = input("{}, where do you want to play (1 to 9): ".format(players_attributes[current_player]["name"]))
+            try:
+                choice = int(choice)
+            except ValueError:
                 print("You have to type an integer between 1 and 9")
                 choice = None
-            elif grid_content[choice-1] != choice:
-                print("Sorry baby, already taken")
-                choice = None
+            else:
+                if not(1 <= choice <= 9):
+                    print("You have to type an integer between 1 and 9")
+                    choice = None
+                elif grid_content[choice-1] != choice:
+                    print("Sorry baby, already taken")
+                    choice = None
+    else:
+        choice = 1
+        while grid_content[choice-1] != choice:
+            choice += 1
+        print("The computer is playing in {}".format(choice))
+        time.sleep(2)
 
     grid_content[choice-1] = players_attributes[current_player]["character"]
 
@@ -56,7 +80,10 @@ while True:
         or grid_content[0] == grid_content[4] and grid_content[4] == grid_content[8]
         or grid_content[2] == grid_content[4] and grid_content[4] == grid_content[6]
     ):
-        print("Congrats {}, you won".format(players_attributes[current_player]["name"]))
+        if players_attributes[current_player]["type"] == "human":
+            print("Congrats {}, you won".format(players_attributes[current_player]["name"]))
+        else:
+            print("The computer won :-( ... this time")
         break
     elif turn_count == 9:
         print(" _")
