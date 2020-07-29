@@ -8,6 +8,19 @@ players_attributes = [
     {"name": "", "character": "O", "type": ""}
 ]
 
+winning_cases = (
+    (0, 1, 2),
+    (3, 4, 5),
+    (6, 7, 8),
+
+    (0, 3, 6),
+    (1, 4, 7),
+    (2, 5, 8),
+
+    (0, 4, 8),
+    (2, 4, 6)
+)
+
 def render(grid):
     def element_color(element):
         try:
@@ -21,6 +34,24 @@ def render(grid):
     print(" {} | {} | {} ".format(*[element_color(element) for element in grid[3:6]]))
     print("---+---+---")
     print(" {} | {} | {} ".format(*[element_color(element) for element in grid[6:]]))
+
+
+def get_winning_choice(player):
+    choice = None
+    for case in winning_cases:
+        potential_choice = None
+        count_win_cases = 0
+        for index in case:
+            item = grid_content[index]
+            if item == players_attributes[player]["character"]:
+                count_win_cases += 1
+            elif item == index + 1:
+                potential_choice = item
+        if count_win_cases == 2 and potential_choice is not None:
+            choice = potential_choice
+            break
+    return choice
+
 
 print("\033[2J\033[0;0H") # clear the screen and move cursor at the top
 
@@ -59,9 +90,15 @@ while True:
                     print("Sorry baby, already taken")
                     choice = None
     else:
-        choice = 1
-        while grid_content[choice-1] != choice:
-            choice += 1
+        choice = get_winning_choice(current_player)
+        if choice is None:
+            choice = get_winning_choice((current_player + 1) % 2)
+            if choice is None:
+                places_priority = (5, 1, 3, 7, 9, 2, 4, 6, 8)
+                for place in places_priority:
+                    if grid_content[place-1] == place:
+                        choice = place
+                        break
         print("The computer is playing in {}".format(choice))
         time.sleep(2)
 
