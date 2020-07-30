@@ -19,7 +19,7 @@ I was made with `Python 3.8.3` but any version of Python 3 should work.
 
 ## How to run me?
 
-Run:
+In a terminal, run:
 
 ```
 python3 tictactoe.py
