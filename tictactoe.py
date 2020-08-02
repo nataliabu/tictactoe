@@ -123,6 +123,7 @@ while True:
             print("The computer won :-( ... this time")
         break
     elif turn_count == 9:
+        print("\033[38;5;212m")
         print(" _")
         print("/ \\")
         print("\\ /")
@@ -133,7 +134,9 @@ while True:
         print("| |")
         print("| |")
         print("\\./")
+        print("\033[0m")
         print("It's a tie")
+        print("")
         break
 
     current_player = (current_player + 1) % 2
